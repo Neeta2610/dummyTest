@@ -18,7 +18,7 @@
         "host": "smtp.gmail.com",
         "auth": {
             "user": "asodekarneeta@gmail.com",
-            "pass": "lovecadb"
+            "pass": "lovecabd"
         },
         "mailfrom": "asodekarneeta@gmail.com",
         "bcc": "neeta1524@gmail.com"
