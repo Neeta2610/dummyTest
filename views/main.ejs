@@ -17,7 +17,6 @@
   <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
     rel="stylesheet">
-
   <!-- Vendor CSS Files -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/icofont/icofont.min.css" rel="stylesheet">
@@ -66,13 +65,14 @@
       <!-- <a href="index.html" class="logo mr-auto"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav class="nav-menu d-none d-lg-block">
-        <ul>
+        <ul style="margin-left: 26em;">
           <li class="active"><a href="index.html">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#feedback">Feedback</a></li>
-          <li><a href="#contact">Infrastructure</a></li>
+          <li><a href="#infrastructure">Infrastructure</a></li>
+          <!-- <li><a href="#register">Register</a></li> -->
 
         </ul>
       </nav><!-- .nav-menu -->
@@ -370,7 +370,7 @@
     </section><!-- End Team Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    <section id="infrastructure" class="contact">
       <div class="container">
 
         <div class="section-title">
@@ -514,7 +514,15 @@
       });
 
     });
+    $('#Checkboxclick').click(function () {
+      if ($('#Checkbox').is(":checked")) {
+        $('input[name=check]').trigger('click').prop('checked', false);
+      }
+      else {
+        $('input[name=check]').trigger('click').prop('checked', true);
 
+      }
+    })
     function onServiceClick(type) {
       // console.log("type : ", type);
       $.ajax({

@@ -1,11 +1,7 @@
 const getDb = require('../utils/dbconnection').getDb;
 const ObjectId = require('mongodb').ObjectId;
-const { response } = require('../utils/response');
 const config = require('../config.json');
-const configSMTP = require('../config.json').smtp_config;
-const configHandlebars = require('../config.json').handlebars;
-const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars');
+const email = require('../utils/sendMail');
 // const scheduler = require('../scheduler.js');
 
 exports.airportData = async (req, res) => {
@@ -49,6 +45,84 @@ exports.airportData = async (req, res) => {
     }
 }
 
+exports.loginPage = async (req, res) => {
+    try {
+        res.render('login', { data: "Hello" })
+    }
+    catch (err) {
+        console.log(err);
+        return err;
+    }
+}
+
+exports.loggedIn = async (req, res) => {
+    try {
+        console.log("logged in : ", req.body);
+        const db=getDb()
+        var result = await db.collection("users")
+            .find({ "email": req.body.email })
+            .toArray();
+            console.log(result);
+        if (result[0].email == req.body.email && result[0].password == req.body.password) {
+            res.send({ status: true })
+        }
+        else {
+            res.send({ status: false })
+        }
+    }
+    catch (err) {
+        console.log(err);
+        return err;
+    }
+}
+
+exports.register = async (req, res) => {
+    try {
+        console.log("register : ", req.body);
+        let pwd = makePassword()
+        const db = getDb()
+        const result = await db.collection("users")
+            .find({ "email": req.body.email }, { $exists: true })
+            .toArray();
+        if (result && result.length > 0) {
+            res.send({ status: false, msg: "Email Address is already registered" })
+        }
+        await db.collection('users')
+            .insertOne({
+                name: req.body.name,
+                email: req.body.email,
+                password: pwd,
+                isAdmin: true
+            }).then(async result => {
+                if (result) {
+                    console.log(true);
+                    var obj = {
+                        hbsFileName: 'passwordTemplate.handlebars',
+                        from: 'asodekarneeta@gmail.com',
+                        to: req.body.email,
+                        subject: 'Registration Successful',
+                        template: 'passwordTemplate',
+                        context: {
+                            name: req.body.name,
+                            password: pwd,
+                            css: "css/style.css"
+                        }
+                    };
+                    await email.sendMail(obj)
+                    res.send({ status: true })
+                }
+                else {
+                    console.log(false);
+                }
+            })
+        l
+    }
+    catch (err) {
+        console.log(err);
+        return err;
+    }
+}
+
 
 exports.services = async (req, res) => {
     try {
@@ -71,7 +145,7 @@ exports.insertEmail = async (req, res) => {
     try {
         const db = getDb()
         console.log("insert email accessed ", req.query);
-        const result = await db.collection("users")
+        const result = await db.collection("subscribed_users")
             .find({ "email": req.query.email }, { $exists: true })
             .toArray();
         if (result && result.length > 0) {
@@ -94,15 +168,15 @@ exports.insertEmail = async (req, res) => {
                     css: "css/style.css"
                 }
             };
-            await db.collection('users')
+            await db.collection('subscribed_users')
                 .insertOne({
                     email: req.query.email,
-                    limit_exceeded:false
+                    limit_exceeded: false
                 })
                 .then(async result => {
                     console.log(true)
                     // //console.log(obj);
-                    await this.sendMail(obj)
+                    await email.sendMail(obj)
                     res.send({ message: "success", data: "You have been subscribed to our daily newsletters" })
                 })
         }
@@ -116,7 +190,7 @@ exports.insertEmail = async (req, res) => {
 exports.newsletters = async function (db) {
     try {
         // const db = getDb()
-        var users = await db.collection('users')
+        var users = await db.collection('subscribed_users')
             .find()
             .toArray()
         var newsletters = await db.collection('newsletters')
@@ -124,9 +198,9 @@ exports.newsletters = async function (db) {
             .toArray()
 
         users.forEach(async item => {
-            console.log("item : ",item);
+            console.log("item : ", item);
             // let count = item.count
-            if (item.limit_exceeded!=undefined && item.limit_exceeded) {
+            if (item.limit_exceeded != undefined && item.limit_exceeded) {
                 onExit();
             }
             else {
@@ -143,9 +217,9 @@ exports.newsletters = async function (db) {
                         link: newsletters[0].link
                     }
                 };
-                await this.sendMail(obj);
-                await db.collection('users')
-                    .updateOne({ email: item.email }, { $set: { limit_exceeded:true } })
+                await email.sendMail(obj);
+                await db.collection('subscribed_users')
+                    .updateOne({ email: item.email }, { $set: { limit_exceeded: true } })
             }
         })
     }
@@ -158,54 +232,6 @@ exports.newsletters = async function (db) {
 
 }
 
-exports.sendMail = function (emailObj) {
-    console.log('email obj is - > ', emailObj);
-
-    var transporter = nodemailer.createTransport({
-        host: configSMTP.host,
-        secure: true, // use SSL
-        auth: {
-            user: configSMTP.auth.user, // neeta
-            pass: configSMTP.auth.pass, //pwd
-        },
-    });
-
-    var mailOptions = {
-        from: emailObj.from,
-        to: emailObj.to,
-        subject: emailObj.subject,
-        template: emailObj.template
-    };
-
-    if (emailObj.hbsFileName) {
-        const handlebarOptions = {
-            viewEngine: {
-                extName: configHandlebars.options.extName,
-                partialsDir: configHandlebars.options.viewEngine.partialsDir,
-                layoutsDir: configHandlebars.options.viewEngine.layoutsDir,
-                defaultLayout: emailObj.hbsFileName,
-            },
-            viewPath: configHandlebars.options.viewPath,
-            extName: configHandlebars.options.extName,
-        };
-
-        transporter.use('compile', hbs(handlebarOptions));
-        mailOptions.context = emailObj.context
-    }
-
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-            return error
-            // return responseData(info, true, 400, 'Error in Sending Email', { error });
-        } else {
-            console.log('Email sent: ', info.response);
-            // return responseData(info, true, 200, 'Email Sent', { info });
-            return info.res
-        }
-    });
-    transporter.close();
-};
 
 
 
@@ -217,4 +243,14 @@ function onExit() {
     catch (err) {
         console.log(err);
     }
+}
+
+
+function makePassword() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 5; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)); }
+
+    return text;
 }

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Airways Insider</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="img/favicon.ico" rel="icon">
+    <link href="img/favicon.ico" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="vendor/owl.carousel/owl.carousel.min.css" rel="stylesheet">
+    <link href="vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="css/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top ">
+        <div class="container d-flex">
+            <div class="contact-info mr-auto">
+                <i class="icofont-envelope"></i> <a href="neeta1524@gmail.com">contact@airways.com</a>
+                <i class="icofont-phone"></i> +1 5589 55488 55
+            </div>
+            <div class="social-links">
+                <!-- <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+        <a href="#" class="skype"><i class="icofont-skype"></i></a>
+        <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a> -->
+                <a target="_blank" href="https://twitter.com/LOGIN" class="twitter"><i class="icofont-twitter"></i></a>
+                <a target="_blank" href="https://www.facebook.com/" class="facebook"><i
+                        class="icofont-facebook"></i></a>
+                <a target="_blank" href="https://www.instagram.com/accounts/login/" class="instagram"><i
+                        class="icofont-instagram"></i></a>
+                <a target="_blank" href="https://web.skype.com/" class="google-plus"><i class="icofont-skype"></i></a>
+                <a target="_blank" href="https://www.linkedin.com/login" class="linkedin"><i
+                        class="icofont-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center">
+
+            <h1 class="logo mr-auto"><a href="index.html">Airways</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo mr-auto"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul style="margin-left: 50em;">
+                    <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="#login">Login</a></li>
+                    <li><a href="#about">About</a></li>
+                    <!-- <li><a href="#services">Services</a></li> -->
+                    <!-- <li><a href="#gallery">Gallery</a></li> -->
+                    <!-- <li><a href="#feedback">Feedback</a></li> -->
+                    <!-- <li><a href="#infrastructure">Infrastructure</a></li> -->
+                    <!-- <li><a href="#register">Register</a></li> -->
+
+                </ul>
+            </nav><!-- .nav-menu -->
+
+        </div>
+    </header><!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container position-relative backgroundOpacity" data-aos="fade-up" data-aos-delay="500">
+            <h1 class="alignItems">Airport Insider</h1>
+            <h2 class="alignItems">You don't need Magic to disappear <br>All you need is a Destination</h2>
+            <!-- <h2>All you need is a Destination</h2> -->
+            <a href="#about" class="btn-get-started scrollto alignItems">Get Started</a>
+        </div>
+
+    </section><!-- End Hero -->
+
+    <main id="main">
+        <section id="login" class="contact">
+            <div class="container">
+                <div class="section-title">
+                    <span>Login</span>
+                    <h2>Login</h2>
+                </div>
+                <div class="row" data-aos="fade-up">
+                    <div class="col-lg-6" style="margin-left: 17em;">
+                        <form action="/logged-in" method="post" role="form" class="php-email-form" id="login-form">
+                            <div class="form-row" style="margin-left: 6em;">
+                                <div class="col-md-6 form-group">
+                                    <input type="email" class="form-control" name="email" id="email"
+                                        placeholder="Your Email" style="width: 20em;" data-rule="email"
+                                        data-msg="Please enter a valid email" />
+                                    <div class="validate"></div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-left: 101px;">
+                                <input type="text" class="form-control" name="password" id="password"
+                                    placeholder="Password" data-rule="minlen:4" data-msg="Password should not be blank"
+                                    style="width: 20em;" />
+                                <div class="validate"></div>
+                            </div>
+                            <div class="mb-3" id="login-msg">
+                                <div class="loading" id="login-load">Loading</div>
+                                <div class="error-message" id="login-err">Fields should not be blank</div>
+                                <div class="sent-message" id="login-ok"></div>
+                            </div>
+                            <div class="text-center" style="margin-left: 19px;"><button type="button"
+                                    onclick="onBtnClick('login','login')">Login</button>
+                                <button type="button" onclick="onBtnClick('register','login')"
+                                    style="margin-left: 14px;">Sign
+                                    Up</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section id="register" class="contact" style="display: none;">
+            <div class="container">
+
+                <div class="section-title">
+                    <span>Register</span>
+                    <h2>Register</h2>
+                    <p>Register user here</p>
+                </div>
+                <div class="row" data-aos="fade-up">
+                    <div class="col-lg-12">
+                        <form action="forms/contact.php" method="post" role="form" class="php-email-form"
+                            id="register-form">
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        placeholder="Enter Name" data-rule="minlen:4"
+                                        data-msg="Please enter at least 4 chars" />
+                                    <div class="validate"></div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="email" class="form-control" name="email" id="email"
+                                        placeholder="Enter Email" data-rule="email"
+                                        data-msg="Please enter a valid email" />
+                                    <div class="validate"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3" id="reg-msg">
+                                <div class="loading" id="reg-load">Loading</div>
+                                <div class="error-message" id="reg-err">Fields should not be blank</div>
+                                <div class="sent-message" id="reg-ok">You have been registered successfully,Please check
+                                    your email</div>
+                            </div>
+                            <div class="text-center"><button type="button"
+                                    onclick="onBtnClick('register','register')">Register</button>
+                                <button type="button" onclick="onBtnClick('login','register')">Go To Login</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- ======= About Section ======= -->
+        <section id="about" class="about">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left">
+                        <img src="img/FamilyAtAirport.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right">
+                        <h3>We will provide you with useful airport information about location, parking, transportation,
+                            taxi, car
+                            rental, airport services and much more.</h3>
+                        <p class="font-italic">
+                            Passengers wait for their flights at the airport.
+                            To put it in more technical terms, it is referred to as all places formed overland or afloat
+                            allowing air
+                            travel and planes to take off and land with necessary technical equipment.
+                        </p>
+                        <ul>
+                            <li><i class="icofont-check-circled"></i> Public transportation between airport and city.
+                            </li>
+                            <li><i class="icofont-check-circled"></i> Good, affordable restaurants.</li>
+                            <li><i class="icofont-check-circled"></i> Hassle-free travelling with your loved ones.</li>
+                        </ul>
+                        <p>
+                            They know which aspects are most important to the passenger journey and are relentless about
+                            delivering on
+                            these 100% of the time: A spotlessly clean terminal and washrooms.
+                            Comfortable gate areas. Warm and friendly staff.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End About Section -->
+
+        <!-- ======= Why Us Section ======= -->
+        <section id="why-us" class="why-us">
+            <div class="container">
+                <div class="section-title">
+                    <span>Why us?</span>
+                    <h2>Why us?</h2>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-4" data-aos="fade-up">
+                        <div class="box">
+                            <span>01</span>
+                            <h4>Discover</h4>
+                            <p>You will find information about everything inside airport </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
+                        <div class="box">
+                            <span>02</span>
+                            <h4>Book Ticket</h4>
+                            <p>Grab tickets over here with exciting offers</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
+                        <div class="box">
+                            <span>03</span>
+                            <h4>Enjoy Travelling</h4>
+                            <p>Hastle-free check-in and enjoy travelling with your loved ones</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Why Us Section -->
+
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer-info">
+                            <h1 class="logo mr-auto"><a href="index.html" style="color: #fff;
+                font-size: 32px !important;
+                font-weight: 700 !important;
+                text-transform: uppercase !important;">Airways</a></h1>
+                            <p>
+                                A108 Adam Street <br>
+                                NY 535022, USA<br><br>
+                                <strong>Phone:</strong> +1 5589 55488 55<br>
+                                <strong>Email:</strong> contact@airways.com<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a target="_blank" href="https://twitter.com/LOGIN" class="twitter"><i
+                                        class="bx bxl-twitter"></i></a>
+                                <a target="_blank" href="https://www.facebook.com/" class="facebook"><i
+                                        class="bx bxl-facebook"></i></a>
+                                <a target="_blank" href="https://www.instagram.com/accounts/login/" class="instagram"><i
+                                        class="bx bxl-instagram"></i></a>
+                                <a target="_blank" href="https://web.skype.com/" class="google-plus"><i
+                                        class="bx bxl-skype"></i></a>
+                                <a target="_blank" href="https://www.linkedin.com/login" class="linkedin"><i
+                                        class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div> -->
+
+                    <div class="col-lg-6 col-md-6 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>Subscribe to our Airways Newsletter, to get new offers daily</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="button" value="Subscribe"
+                                onclick="onSubscribe()">
+                        </form>
+                        <div class="mb-3">
+                            <!-- <div class="error-message" id="err"></div> -->
+                            <div class="sent-message" id="message"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Airways</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/day-multipurpose-html-template-for-free/ -->
+                Designed by <a>Bootstrap</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="vendor/php-email-form/validate.js"></script>
+    <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="vendor/venobox/venobox.min.js"></script>
+    <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="vendor/aos/aos.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="js/main.js"></script>
+
+    <!-- Jquery JS Files -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        // api calls using JQuery
+
+        $(document).ready(function () {
+        });
+        function onSubscribe() {
+            console.log("form data : ", $('form').serializeArray());
+            let formArray = $('form').serializeArray()
+            let email = formArray[0].value
+            console.log(email);
+            if (email == "") {
+                $('#message').text("Email should not be null")
+            }
+            else {
+                $.ajax({
+                    type: 'POST',
+                    url: "/insert-email?email=" + email,
+                    success:
+                        function (res) {
+                            console.log('success', res);
+                            if (res.message == "success") {
+                                $("#message").css('display', 'block')
+                                $('#message').html(res.data)
+                            } else {
+                                $("#message").css('display', 'block')
+                                $('#message').html(res.data)
+                            }
+                        }
+                })
+            }
+        }
+
+        function popupHandler(load, err, ok, type) {
+            console.log(load, err, ok, type);
+            if (load == true) {
+                $('#' + type + '-load').css('display', 'block')
+                $('#' + type + '-err').css('display', 'none')
+                $('#' + type + '-ok').css('display', 'none')
+            }
+            else if (err == true) {
+                $('#' + type + '-load').css('display', 'none')
+                $('#' + type + '-err').css('display', 'block')
+                $('#' + type + '-ok').css('display', 'none')
+            }
+            else if (ok == true) {
+                $('#' + type + '-load').css('display', 'none')
+                $('#' + type + '-err').css('display', 'none')
+                $('#' + type + '-ok').css('display', 'block')
+            }
+            else {
+                $('#' + type + '-load').css('display', 'none')
+                $('#' + type + '-err').css('display', 'none')
+                $('#' + type + '-ok').css('display', 'none')
+            }
+        }
+
+        function onBtnClick(type, page) {
+            if (type == 'login') {
+                $('#login').css('display', 'block')
+                $('#register').css('display', 'none')
+            }
+            else {
+                $('#login').css('display', 'none')
+                $('#register').css('display', 'block')
+            }
+
+            if (type == 'login' && page == 'login') {
+                let formArray = $('#login-form').serializeArray()
+                console.log("logged in : ", formArray);
+                // let email = formArray[0].value
+                console.log(formArray,window.location.href);
+                // let data = {obj : formArray}
+                if (formArray[0].value != "" && formArray[1].value != "") {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/logged-in",
+                        data: formArray,
+                        success:
+                            function (res) {
+                                console.log('success', res);
+                                if (res.status) {
+                                    popupHandler(false, false, false, 'login')
+                                    window.open(window.location.href+"main")
+                                }
+                                else {
+                                    popupHandler(false, true, false, 'login')
+                                    // document.getElementById("req-err").innerHTML=res.msg
+                                    $('#login-err').html("Invalid Credentials")
+                                }
+                            }
+                    })
+                }
+                else { 
+                    popupHandler(false, true, false, 'login')
+                }
+            }
+            else if (type == 'register' && page == 'register') {
+                let formArray = $('#register-form').serializeArray()
+                // let email = formArray[0].value
+                console.log(formArray, formArray[0].value, formArray[1].value);
+                if (formArray[0].value != "" && formArray[1].value != "") {
+                    // let data = { obj: formArray }
+                    $.ajax({
+                        type: 'POST',
+                        url: "/register",
+                        data: formArray,
+                        success:
+                            function (res) {
+                                // popupHandler(true,false,false,'reg')
+                                console.log('success', res);
+                                if (res.status) {
+                                    popupHandler(false, false, true, 'reg')
+                                }
+                                else {
+                                    popupHandler(false, true, false, 'reg')
+                                    // document.getElementById("req-err").innerHTML=res.msg
+                                    $('#reg-err').html(res.msg)
+                                }
+                            }
+                    })
+                }
+                else {
+                    popupHandler(false, true, false, 'reg')
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
