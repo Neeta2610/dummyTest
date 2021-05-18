@@ -35,7 +35,28 @@ exports.airportData = async (req, res) => {
         logos.forEach(element => {
             element.logo = `${config.backend_url}/${config.img_path}/${element.logo}`
         });
-        obj = { feedbackData: filteredData, galleryData: gallery, servicesData: services, logos: logos }
+        var equipments = await db.collection('equipments')
+            .find()
+            .toArray()
+        equipments.forEach(e => {
+            console.log(e.img);
+            if (typeof e.img == "string") {
+                e.img = `${config.backend_url}/${config.img_path}/${e.img}`
+            }
+            else {
+                console.log(true);
+                let arr = []
+                e.img.forEach(i => {
+                    console.log(i);
+                    i = `${config.backend_url}/${config.img_path}/${i}`
+                    arr.push(i)
+                })
+                e.img = arr
+                // console.log(e.img);
+            }
+        })
+        // console.log("equipments : ", equipments);
+        obj = { feedbackData: filteredData, galleryData: gallery, servicesData: services, logos: logos, equipments: equipments }
         // console.log(obj);
         res.render('main', { data: obj })
     }
@@ -58,13 +79,14 @@ exports.loginPage = async (req, res) => {
 exports.loggedIn = async (req, res) => {
     try {
         console.log("logged in : ", req.body);
-        const db=getDb()
+        const db = getDb()
         var result = await db.collection("users")
             .find({ "email": req.body.email })
             .toArray();
-            console.log(result);
+        console.log(result);
         if (result[0].email == req.body.email && result[0].password == req.body.password) {
-            res.send({ status: true })
+
+            res.send({ status: true, isAdmin: result[0].isAdmin })
         }
         else {
             res.send({ status: false })
@@ -92,7 +114,7 @@ exports.register = async (req, res) => {
                 name: req.body.name,
                 email: req.body.email,
                 password: pwd,
-                isAdmin: true
+                isAdmin: false
             }).then(async result => {
                 if (result) {
                     console.log(true);
@@ -140,6 +162,147 @@ exports.services = async (req, res) => {
         return err;
     }
 }
+
+exports.saveRecord = async (req, res) => {
+    try {
+        console.log("recordsave  accessed", req.body);
+        const db = getDb();
+        await db.collection('equipments')
+            .updateOne({ _id: ObjectId(req.body.id) }, { $set: { date: new Date() } })
+        let record = await db.collection('equipments')
+            .find({ '_id': ObjectId(req.body.id) })
+            .toArray()
+            // console.log(record);
+           let modified_date = formatDate(record[0].date) 
+        res.send("Record Modified Successfully",{modified_date:modified_date})
+    }
+    catch (err) {
+        console.log(err);
+        return err;
+    }
+}
+
+exports.equipmentRecord = async (req, res) => {
+    try {
+        console.log("equipments accessed", req.query, req.body);
+        const db = getDb();
+        let record = await db.collection('equipments')
+            .find({ '_id': ObjectId(req.query.id) })
+            .toArray()
+        record.forEach(e => {
+            // console.log(e.img);
+            if (typeof e.img == "string") {
+                e.img = `${config.backend_url}/${config.img_path}/${e.img}`
+            }
+            else {
+                console.log(true);
+                let arr = []
+                e.img.forEach(i => {
+                    // console.log(i);
+                    i = `${config.backend_url}/${config.img_path}/${i}`
+                    arr.push(i)
+                })
+                e.img = arr
+                // console.log(e.img);
+            }
+        })
+
+        console.log(record);
+        res.send({ data: record })
+    }
+    catch (err) {
+        console.log(err);
+        return err;
+    }
+}
+
+exports.equipPage = async (req, res) => {
+    try {
+        console.log("equipments accessed", req.query);
+        const db = getDb();
+        let record = await db.collection('equipments')
+            .find({ '_id': ObjectId(req.query.id) })
+            .toArray()
+        record.forEach(e => {
+            // console.log(e.img);
+            if (typeof e.img == "string") {
+                e.img = `${config.backend_url}/${config.img_path}/${e.img}`
+            }
+            else {
+                console.log(true);
+                let arr = []
+                e.img.forEach(i => {
+                    // console.log(i);
+                    i = `${config.backend_url}/${config.img_path}/${i}`
+                    arr.push(i)
+                })
+                // console.log(e.img);
+                e.img = arr[1]
+            }
+            
+            e.date = e.date?formatDate(e.date):"No Records Found"
+        })
+        console.log(record[0]);
+        res.render('equip-record', { data: record[0] })
+    }
+    catch (err) {
+        console.log(err);
+        return err;
+    }
+}
+
+function dateToYMD(date) {
+    console.log(date);
+    var strArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var d = date.getDate();
+    var m = strArray[date.getMonth()];
+    var y = date.getFullYear();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    return '' + (d <= 9 ? '0' + d : d) + ',' + m + ',' + y + " " + hours + ":" + minutes + ":" + seconds;
+}
+
+function formatDate(date) {
+    console.log(date, new Date(date));
+    // date = new Date(2021, 4, 15, 14, 20, 36, 0);
+    let d1 = new Date(date);
+    let d2 = new Date();
+    let difference = d2.getTime() - d1.getTime()
+    let seconds = Math.floor(difference / 1000)
+    let minutes = Math.round((difference / 60000))
+    let hours = Math.round(difference / 3600000)
+    let dayOfMonth = d1.getDate();
+    let month = d1.getMonth() + 1;
+    let year = d1.getFullYear();
+    // console.log("date is ",d1,d2);
+
+
+    if (seconds <= 60) {
+        // console.log("seconds",seconds);
+        return `${seconds} seconds ago`;
+    }
+    else if (minutes <= 60) {
+        // console.log("minutes",minutes);
+        if (minutes == 1) { return `${minutes} minute ago`; }
+        else { return `${minutes} minutes ago`; }
+    }
+    else if (hours <= 24) {
+        // console.log("hours",hours);
+        if (hours == 1) { return `${hours} hour ago` }
+        else { return `${hours} hours ago` }
+    }
+    else {
+        console.log(year, month - 1, dayOfMonth, hours, minutes, seconds);
+        let dateformtted = new Date(year, month, dayOfMonth, hours, minutes, seconds); // 1 Jan 2011, 00:00:00
+        // date = this.datePipe.transform(d1, "d MMM , y, h:mm:ss a");
+        console.log("date->", dateToYMD(dateformtted));
+
+        return `${dateToYMD(dateformtted)}`;
+    }
+
+}
+
 
 exports.insertEmail = async (req, res) => {
     try {
@@ -209,7 +372,7 @@ exports.newsletters = async function (db) {
                     hbsFileName: 'emailTemplate.handlebars',
                     from: 'asodekarneeta@gmail.com',
                     to: item.email,
-                    subject: 'Daily Newsletter from Airways',
+                    subject: 'Daily Newsletter from Airport Jammu Satvari',
                     template: 'emailTemplate',
                     context: {
                         title: newsletters[0].title,

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Airways Insider</title>
+  <title>Airport Jammu Satvari Insider</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -37,7 +37,7 @@
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top ">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
-        <i class="icofont-envelope"></i> <a href="neeta1524@gmail.com">contact@airways.com</a>
+        <i class="icofont-envelope"></i> <a href="neeta1524@gmail.com">contact@Airport Jammu Satvari.com</a>
         <i class="icofont-phone"></i> +1 5589 55488 55
       </div>
       <div class="social-links">
@@ -60,18 +60,20 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">Airways</a></h1>
+      <h1 class="logo mr-auto"><a href="index.html">Airport Jammu Satvari</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav class="nav-menu d-none d-lg-block">
-        <ul style="margin-left: 26em;">
+        <ul style="margin-left: 19em;">
           <li class="active"><a href="index.html">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#feedback">Feedback</a></li>
           <li><a href="#infrastructure">Infrastructure</a></li>
+          <li><a href="#equipments">Equipments</a></li>
+          <li><a onclick="onLogout()" style="cursor: pointer;">Logout</a></li>
           <!-- <li><a href="#register">Register</a></li> -->
 
         </ul>
@@ -389,6 +391,60 @@
       </div>
     </section><!-- End Contact Section -->
 
+    <!-- ======= Portfolio Section ======= -->
+    <section id="equipments" class="portfolio">
+      <div class="container">
+
+        <div class="section-title">
+          <span>Equipments</span>
+          <h2>Equipments</h2>
+        </div>
+
+        <!-- <div class="row" data-aos="fade-up">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-app">App</li>
+              <li data-filter=".filter-card">Card</li>
+              <li data-filter=".filter-web">Web</li>
+            </ul>
+          </div>
+        </div> -->
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="150">
+          <% data.equipments.forEach(function(item){ %>
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <%if(typeof item.img=='string' ){%>
+                <img src="<%=item.img%>" class="img-fluid" alt="">
+                <%}else{%>
+                  <img src="<%=item.img[0]%>" class="img-fluid" alt="">
+                  <%}%>
+
+                    <div class="portfolio-info">
+                      <h4>
+                        <%=item.title%>
+                      </h4>
+                      <!-- <p>
+                  <%=item.description%>
+                </p> -->
+                      <%if(typeof item.img=='string' ){%>
+                        <a onclick="onEquipmentClick('<%=item._id%>')" style="cursor: pointer;top: 0.5em;" class="details-link"
+                          title="More Details"><i class="bx bx-link"></i></a>
+                        <%}else{%>
+                          <% item.img.forEach(function(element){ %>
+                            <a onclick="onEquipmentClick('<%=item._id%>')" style="cursor: pointer;top: 0.5em;" class="details-link"
+                              title="More Details"><i class="bx bx-link"></i></a>
+                            <%})%>
+                              <%}%>
+                    </div>
+            </div>
+            <%})%>
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -402,12 +458,12 @@
               <h1 class="logo mr-auto"><a href="index.html" style="color: #fff;
                 font-size: 32px !important;
                 font-weight: 700 !important;
-                text-transform: uppercase !important;">Airways</a></h1>
+                text-transform: uppercase !important;">Airport Jammu Satvari</a></h1>
               <p>
                 A108 Adam Street <br>
                 NY 535022, USA<br><br>
                 <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> contact@airways.com<br>
+                <strong>Email:</strong> contact@Airport Jammu Satvari.com<br>
               </p>
               <div class="social-links mt-3">
                 <a target="_blank" href="https://twitter.com/LOGIN" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -445,7 +501,7 @@
 
           <div class="col-lg-6 col-md-6 footer-newsletter">
             <h4>Our Newsletter</h4>
-            <p>Subscribe to our Airways Newsletter, to get new offers daily</p>
+            <p>Subscribe to our Airport Jammu Satvari Newsletter, to get new offers daily</p>
             <form action="" method="post">
               <input type="email" name="email"><input type="button" value="Subscribe" onclick="onSubscribe()">
             </form>
@@ -461,7 +517,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Airways</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Airport Jammu Satvari</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
@@ -503,6 +559,7 @@
     // api calls using JQuery
 
     $(document).ready(function () {
+
       $('.text-carousal').slick({
         slidesToShow: 3,
         slidesToScroll: 3,
@@ -540,6 +597,21 @@
       })
     }
 
+    function onEquipmentClick(id) {
+      console.log("/equipment-record?id= ", id);
+      $.ajax({
+        type: 'POST',
+        url: "/equipment-record?id=" + id,
+        success:
+          function (res) {
+            console.log('success', res);
+            localStorage.setItem('record',JSON.stringify(res))
+            var link = window.location.href.slice(0, 22)
+            window.location.href = link + "equipment?id=" + id
+          }
+      })
+    }
+
     function onSubscribe() {
       console.log("form data : ", $('form').serializeArray());
       let formArray = $('form').serializeArray()
@@ -565,6 +637,11 @@
             }
         })
       }
+    }
+
+    function onLogout() {
+      var logout = window.location.href.slice(0, 22)
+      window.location.href = logout
     }
 
   </script>

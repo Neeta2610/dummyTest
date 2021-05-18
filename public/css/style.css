@@ -427,7 +427,7 @@
   #hero {
     width: 100%;
     height: 100vh;
-    background: url("../img/bg-main.jpg") top center;
+    background: url("../img/bg-main.jpeg") top center;
     background-size: cover;
     position: relative;
   }
@@ -1167,6 +1167,22 @@
     color: #fff;
     transition: 0.4s;
   }
+
+  .modal-footer input[type="button"] {
+    background: #cc1616 !important;
+    border: 0 !important;
+    padding: 10px 24px !important;
+    color: #fff !important;
+    transition: 0.4s !important;
+  }
+
+  .modal-footer input[type="button"]:hover {
+    background: #e82d2d !important;
+    border: 0 !important;
+    padding: 10px 24px !important;
+    color: #fff !important;
+    transition: 0.4s !important;
+  }
   
   .contact .php-email-form button[type="submit"]:hover {
     background: #e82d2d;
@@ -1233,6 +1249,10 @@
   /*--------------------------------------------------------------
   # Portfolio Details
   --------------------------------------------------------------*/
+
+  .owl-nav{
+    display: none;
+  }
   .portfolio-details {
     padding-top: 40px;
   }

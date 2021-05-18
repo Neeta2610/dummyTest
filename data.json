@@ -1,26 +1,37 @@
 [
     {
         "id":0,
-        "logo":"logo1.png"
+        "img":"announcer.jpeg",
+        "title":"Public Announcer"
     },
     {
         "id":1,
-        "logo":"logo2.png" 
+        "img":["cctv-server1.jpeg","cctv-server2.jpeg"],
+        "title":"CCTV Server" 
     },
     {
         "id":2,
-        "logo":"logo3.png" 
+        "img":"DFMD.jpeg",
+        "title":"DFMD (Door Frame Metal Detector)" 
     },
     {
         "id":3,
-        "logo":"logo4.png" 
+        "img":["fids1.jpeg","fids2.jpeg"],
+        "title":"FIDS (Flight Information Display)"
     },
     {
         "id":4,
-        "logo":"logo5.png" 
+        "img":"HHMD.jpeg",
+        "title":"HHMD" 
     },
     {
         "id":5,
-        "logo":"logo6.png" 
+        "img":["X-bis1.jpeg","X-bis2.jpeg"],
+        "title":"X-bis" 
+    },
+    {
+        "id":6,
+        "img":"etd.jpeg",
+        "title":"ETD (Explosive Trace Detector)"
     }
 ]
