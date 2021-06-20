@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 var ejs = require("ejs").__express;
 // Listen on Port 5000
-app.listen(port, () => console.info(`App listening on port ${port}`))
+app.listen(process.env.PORT || port, () => console.info(`App listening on port ${port}`))
 app.use(express.static('public'));
 
 app.use(express.json());
