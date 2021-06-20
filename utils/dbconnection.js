@@ -19,8 +19,8 @@ module.exports.dbNameUrl = function () {
 let _db;
 
 const mongoConnect = callback => {
-
-    var dbName = this.dbNameUrl()
+    
+    var dbName ="mongodb+srv://Shriom:Sh123456@cluster0.8hhfw.mongodb.net/Cluster0?retryWrites=true&w=majority"
     MongoClient.connect(
         dbName, dbOptions
     )
