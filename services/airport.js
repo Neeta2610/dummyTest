@@ -168,13 +168,13 @@ exports.saveRecord = async (req, res) => {
         console.log("recordsave  accessed", req.body);
         const db = getDb();
         await db.collection('equipments')
-            .updateOne({ _id: ObjectId(req.body.id) }, { $set: { date: new Date() } })
+            .updateOne({ _id: req.body.id }, { $set: { date: new Date() } })
         let record = await db.collection('equipments')
-            .find({ '_id': ObjectId(req.body.id) })
+            .find({ '_id': req.body.id })
             .toArray()
-            // console.log(record);
-           let modified_date = formatDate(record[0].date) 
-        res.send("Record Modified Successfully",{modified_date:modified_date})
+        console.log(record);
+        let modified_date = formatDate(record[0].date)
+        res.send(200, { modified_date: modified_date })
     }
     catch (err) {
         console.log(err);
@@ -187,10 +187,11 @@ exports.equipmentRecord = async (req, res) => {
         console.log("equipments accessed", req.query, req.body);
         const db = getDb();
         let record = await db.collection('equipments')
-            .find({ '_id': ObjectId(req.query.id) })
+            .find({ _id: req.query.id })
             .toArray()
+        console.log("record :::>>>> ", record);
         record.forEach(e => {
-            // console.log(e.img);
+            console.log("e.img  -->> ", e.img);
             if (typeof e.img == "string") {
                 e.img = `${config.backend_url}/${config.img_path}/${e.img}`
             }
@@ -207,8 +208,8 @@ exports.equipmentRecord = async (req, res) => {
             }
         })
 
-        console.log(record);
-        res.send({ data: record })
+        console.log("result > ", record[0]);
+        res.send({ data: record[0] })
     }
     catch (err) {
         console.log(err);
@@ -221,7 +222,7 @@ exports.equipPage = async (req, res) => {
         console.log("equipments accessed", req.query);
         const db = getDb();
         let record = await db.collection('equipments')
-            .find({ '_id': ObjectId(req.query.id) })
+            .find({ '_id': req.query.id })
             .toArray()
         record.forEach(e => {
             // console.log(e.img);
@@ -239,8 +240,8 @@ exports.equipPage = async (req, res) => {
                 // console.log(e.img);
                 e.img = arr[1]
             }
-            
-            e.date = e.date?formatDate(e.date):"No Records Found"
+
+            e.date = e.date ? formatDate(e.date) : "No Records Found"
         })
         console.log(record[0]);
         res.render('equip-record', { data: record[0] })
