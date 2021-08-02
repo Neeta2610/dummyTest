@@ -373,7 +373,7 @@ exports.newsletters = async function (db) {
                     hbsFileName: 'emailTemplate.handlebars',
                     from: 'asodekarneeta@gmail.com',
                     to: item.email,
-                    subject: 'Daily Newsletter from Airport Jammu Satvari',
+                    subject: 'Daily Newsletter from Airport Jammu Satwari',
                     template: 'emailTemplate',
                     context: {
                         title: newsletters[0].title,
