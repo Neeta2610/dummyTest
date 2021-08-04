@@ -56,7 +56,7 @@ exports.airportData = async (req, res) => {
             }
         })
         // console.log("equipments : ", equipments);
-        obj = { feedbackData: filteredData, galleryData: gallery, servicesData: services, logos: logos, equipments: equipments }
+        obj = { url:config.backend_url ,feedbackData: filteredData, galleryData: gallery, servicesData: services, logos: logos, equipments: equipments }
         // console.log(obj);
         res.render('main', { data: obj })
     }
@@ -68,7 +68,7 @@ exports.airportData = async (req, res) => {
 
 exports.loginPage = async (req, res) => {
     try {
-        res.render('login', { data: "Hello" })
+        res.render('login', { data: "Hello",url:config.backend_url })
     }
     catch (err) {
         console.log(err);

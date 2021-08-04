@@ -12,7 +12,7 @@
             "useUnifiedTopology": true
         }
     },
-    "backend_url": "https://glacial-lake-36126.herokuapp.com/",
+    "backend_url": "https://glacial-lake-36126.herokuapp.com",
     "img_path": "img",
     "smtp_config": {
         "host": "smtp.gmail.com",

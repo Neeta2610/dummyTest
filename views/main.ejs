@@ -73,7 +73,7 @@
           <li><a href="#feedback">Feedback</a></li>
           <li><a href="#infrastructure">Infrastructure</a></li>
           <li><a href="#equipments">Equipments</a></li>
-          <li><a onclick="onLogout()" style="cursor: pointer;">Logout</a></li>
+          <li><a onclick="onLogout('<%=data.url%>')" style="cursor: pointer;">Logout</a></li>
           <!-- <li><a href="#register">Register</a></li> -->
 
         </ul>
@@ -428,11 +428,11 @@
                   <%=item.description%>
                 </p> -->
                       <%if(typeof item.img=='string' ){%>
-                        <a onclick="onEquipmentClick('<%=item._id%>')" style="cursor: pointer;top: 0.5em;" class="details-link"
+                        <a onclick="onEquipmentClick('<%=item._id%>','<%=data.url%>')" style="cursor: pointer;top: 0.5em;" class="details-link"
                           title="More Details"><i class="bx bx-link"></i></a>
                         <%}else{%>
                           <% item.img.forEach(function(element){ %>
-                            <a onclick="onEquipmentClick('<%=item._id%>')" style="cursor: pointer;top: 0.5em;" class="details-link"
+                            <a onclick="onEquipmentClick('<%=item._id%>','<%=data.url%>')" style="cursor: pointer;top: 0.5em;" class="details-link"
                               title="More Details"><i class="bx bx-link"></i></a>
                             <%})%>
                               <%}%>
@@ -596,7 +596,7 @@
       })
     }
 
-    function onEquipmentClick(id) {
+    function onEquipmentClick(id,url) {
       console.log("/equipment-record?id= ", id);
       $.ajax({
         type: 'POST',
@@ -605,8 +605,8 @@
           function (res) {
             console.log('success', res);
             localStorage.setItem('record',JSON.stringify(res))
-            var link = window.location.href.slice(0, 22)
-            window.location.href = link + "equipment?id=" + id
+            // var link = window.location.href.slice(0, 22)
+            window.location.href = url + "/equipment?id=" + id
           }
       })
     }
@@ -638,9 +638,10 @@
       }
     }
 
-    function onLogout() {
-      var logout = window.location.href.slice(0, 22)
-      window.location.href = logout
+    function onLogout(url) {
+      console.log("window.location.href length ",window.location.href.length,window.location.href.slice(0, 22),url);
+      // var logout = window.location.href.slice(0, 22)
+      window.location.href = url + '/login'
     }
 
   </script>
