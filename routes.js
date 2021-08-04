@@ -5,6 +5,7 @@ const sessionMiddleware = require('./utils/middleware');
 // router.use(sessionMiddleware);
 router.get('/main',airport.airportData)
 router.get('/login',airport.loginPage)
+router.get('',airport.loginPage)
 router.post('/logged-in',airport.loggedIn)
 router.post('/register',airport.register)
 router.post('/service', airport.services)
