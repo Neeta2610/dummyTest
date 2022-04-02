@@ -5,7 +5,6 @@ const routes = require('./routes');
 const mongoConnect = require('./utils/dbconnection').mongoConnect;
 const bodyParser = require('body-parser');
 const compression = require('compression');
-const functions = require('firebase-functions')
 var ejs = require("ejs").__express;
 // Listen on Port 3000
 app.listen(process.env.PORT || port, () => console.info(`App listening on port ${port}`))
@@ -25,10 +24,6 @@ app.use(compression());
 
 // Navigation
 app.use('/', routes);
-
-exports.helloWorld = functions.https.onRequest((request,response)=>{
-  response.send("Hello from Firebase")
-})
 
 mongoConnect(() => {
     app.listen(4000);
