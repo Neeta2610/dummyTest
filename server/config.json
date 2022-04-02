@@ -1,0 +1,35 @@
+{
+    "port": 4000,
+    "appdata_initials": "zt",
+    "mongodb": {
+        "host": "0.0.0.0",
+        "db": "itiseasy_will",
+        "port": 27017,
+        "max_pool_size": 500,
+        "username": "",
+        "password": "",
+        "options": {
+            "useUnifiedTopology": true
+        }
+    },
+    "img_path": "img",
+    "smtp_config": {
+        "host": "smtp.gmail.com",
+        "auth": {
+            "user": "asodekarneeta@gmail.com",
+            "pass": "lovecadb"
+        },
+        "mailfrom": "asodekarneeta@gmail.com"
+    },
+    "handlebars": {
+        "options": {
+            "viewEngine": {
+                "extName": ".handlebars",
+                "partialsDir": "views/",
+                "layoutsDir": "views/"
+            },
+            "viewPath": "views/",
+            "extName": ".handlebars"
+        }
+    }
+}
