@@ -2,7 +2,7 @@ const mongodb = require('mongodb');
 const config = require('../config.json');
 const MongoClient = mongodb.MongoClient;
 const dbOptions = config.mongodb.options;
-const emailer = require('../services/airport')
+const emailer = require('../services/main')
 
 module.exports.dbNameUrl = function () {
     var dbName = (config.mongodb.host + ':' + config.mongodb.port + '/' + config.mongodb.db);
