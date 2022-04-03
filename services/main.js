@@ -51,27 +51,27 @@ exports.getData = async (req, res) => {
 //     }
 // }
 
-// exports.loggedIn = async (req, res) => {
-//     try {
-//         console.log("logged in : ", req.body);
-//         const db = getDb()
-//         var result = await db.collection("users")
-//             .find({ "email": req.body.email })
-//             .toArray();
-//         console.log(result);
-//         if (result[0].email == req.body.email && result[0].password == req.body.password) {
+exports.loggedIn = async (req, res) => {
+    try {
+        console.log("logged in : ", req.body);
+        const db = getDb()
+        var result = await db.collection("users")
+            .find({ "email": req.body.email })
+            .toArray();
+        console.log(result);
+        if (result[0].email == req.body.email && result[0].password == req.body.password) {
 
-//             res.send({ status: true, isAdmin: result[0].isAdmin })
-//         }
-//         else {
-//             res.send({ status: true, isAdmin:false,invalid:true })
-//         }
-//     }
-//     catch (err) {
-//         console.log(err);
-//         return err;
-//     }
-// }
+            res.send({ status: true})
+        }
+        else {
+            res.send({ status: true })
+        }
+    }
+    catch (err) {
+        console.log(err);
+        return err;
+    }
+}
 
 // exports.about = async (req, res) => {
 //     try {
@@ -150,35 +150,34 @@ exports.getData = async (req, res) => {
 //     }
 // }
 
-// exports.register = async (req, res) => {
-//     try {
-//         console.log("register : ", req.body);
-//         let pwd = makePassword()
-//         const db = getDb()
-//         const result = await db.collection("users")
-//             .find({ "email": req.body.email }, { $exists: true })
-//             .toArray();
-//         if (result && result.length > 0) {
-//             res.send({ status: false, msg: "Email Address is already registered" })
-//         }
-//         req.body.isAdmin = false;
-//         await db.collection('users')
-//             .insertOne(req.body).then(async result => {
-//                 if (result) {
-//                     console.log(true);
-//                     res.send({ status: true })
-//                 }
-//                 else {
-//                     console.log(false);
-//                 }
-//             })
+exports.register = async (req, res) => {
+    try {
+        console.log("register : ", req.body);
+        let pwd = makePassword()
+        const db = getDb()
+        const result = await db.collection("users")
+            .find({ "email": req.body.email }, { $exists: true })
+            .toArray();
+        if (result && result.length > 0) {
+            res.send({ status: false, msg: "Email Address is already registered" })
+        }
+        await db.collection('users')
+            .insertOne(req.body).then(async result => {
+                if (result) {
+                    console.log(true);
+                    res.send({ status: true })
+                }
+                else {
+                    console.log(false);
+                }
+            })
 
-//     }
-//     catch (err) {
-//         console.log(err);
-//         return err;
-//     }
-// }
+    }
+    catch (err) {
+        console.log(err);
+        return err;
+    }
+}
 
 
 // exports.services = async (req, res) => {

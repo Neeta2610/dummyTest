@@ -17,7 +17,7 @@ app.use(express.urlencoded({ limit: '50mb' }));
 // }));
 
 // Set View's
-app.set('views', './../views');
+app.set('views', './views');
 app.set('view engine', 'ejs');
 app.engine(".ejs", ejs);
 app.use(compression());
